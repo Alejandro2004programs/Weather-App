@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+}
+
+.searchBarContainer {
+    display: flex;
+    gap: 8px;
+}
+
+#locationInput {
+    border-radius: 16px;
+    border: none;
+    background-color: rgb(213, 212, 212);
+}
+
+#locationInput:hover {
+    opacity: 0.8;
+}
