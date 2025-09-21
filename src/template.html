@@ -1,17 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-</head>
-<body>
-    <form class="locationForm">
-        <div class="searchBarContainer">
-            <label for="locationInput">Search for a new location: </label>
-            <input type="text" id="locationInput" name="locationInput">
-            <button type="submit">Search</button>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <form class="locationForm">
+          <div class="searchBarContainer">
+            <input
+              type="text"
+              id="locationInput"
+              name="locationInput"
+              placeholder="Search city"
+              required
+            />
+            <button type="submit" class="searchButton">🔍</button>
+          </div>
+        </form>
+      </div>
+      <div class="mainContent">
+        <div class="mainContentHeaderDiv">
+          <p class="currentLocation">Location name here</p>
         </div>
-    </form>
-</body>
+        <div class="currentWeatherDiv">
+          <p class="currentTemperature">75°F</p>
+          <p class="weatherConditions">Weather conditions</p>
+        </div>
+      </div>
+      <div class="additionalContent">
+        <div class="futureHoursContainer">
+          <!-- I could append these to the DOM using javascript because it will be so many div elements here that I cant even fill in -->
+          <!-- This first one is for visualization purposes -->
+          <div class="futureHourDiv">
+            <div>1pm</div>
+            <div>
+              <img>
+            </div>
+            <div>
+              75 F
+            </div>
+          </div>
+          <div class="futureHourDiv">
+            <div>
+
+            </div>
+            <div>
+
+            </div>
+            <div>
+
+            </div>
+          </div>
+          <div class="futureHourDiv">
+
+          </div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+          <div class="futureHourDiv"></div>
+        </div>
+        <div class="futureDaysContainer"></div>
+      </div>
+    </div>
+  </body>
 </html>

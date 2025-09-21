@@ -1,9 +1,42 @@
 * {
     margin: 0;
+    font-family: Verdana, sans-serif;
+}
+
+/* Grid layout */
+
+.container {
+    display: grid;
+    grid-template-rows: 0.25fr 1fr 1fr;
+    width: 100dvw;
+    height: 100dvh;
+}
+
+.header {
+    grid-row: 1 / 2;
+}
+
+.mainContent {
+    grid-row: 2 / 3;
+}
+
+.additionalContent {
+    grid-row: 3 / 4;
+}
+
+/* Header */
+
+.locationForm {
+    width: 100%;
+    height: 100%;
 }
 
 .searchBarContainer {
+    height: 100%;
+    width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 8px;
 }
 
@@ -11,8 +44,114 @@
     border-radius: 16px;
     border: none;
     background-color: rgb(213, 212, 212);
+    height: 25px;
 }
 
 #locationInput:hover {
     opacity: 0.8;
+}
+
+.searchButton {
+    border-radius: 100px;
+    padding: 8px 8px;
+    border: none;
+}
+
+.searchButton:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+/* Main Content */
+
+.mainContent {
+    background-color: rgb(222, 222, 222);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.mainContentHeaderDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.currentLocation {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.weatherConditions {
+    display: flex;
+    justify-content: center;
+}
+
+.currentWeatherDiv {
+    border-radius: 100px;
+    border: 2px solid blue;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.currentTemperature {
+    font-size: 32px;
+}
+
+/* Additional Content */
+
+.additionalContent {
+    background-color: rgba(0, 0, 255, 0.325);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 100dvw;
+}
+
+.futureHoursContainer {
+    height: 45%;
+    width: 95dvw;
+    background-color: rgb(210, 210, 210);
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 8px;
+    padding-right: 8px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    gap: 8px;
+}
+
+.futureDaysContainer {
+    height: 45%;
+    min-width: 95dvw;
+    background-color: rgb(215, 214, 214);
+    border-radius: 32px;
+}
+
+.futureHourDiv {
+    border: 2px solid blue;
+    height: 100px;
+    width: 50px;
+    flex: 0 0 auto;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.futureDayDiv {
+
 }
