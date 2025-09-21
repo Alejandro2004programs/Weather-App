@@ -1,43 +1,14 @@
 import "./styles.css";
+import {compareSentenceLength, upperCaseFirstLetter, get24HourForecast, get24HourTimes} from "./helperFunctions.js";
 
 class weatherData {
-    constructor(locationName, currentConditions, daysArray) {
+    constructor(locationName, currentConditions, hoursArray, forecastArray) {
         this.locationName = locationName;
         this.currentConditions = currentConditions;
-        this.daysArray = daysArray;
+        this.hoursArray = hoursArray;
+        this.forecastArray = forecastArray;
     }
 } 
-
-function compareSentenceLength(firstSentence, secondSentence) {
-    let count1 = 0;
-    let count2 = 0;
-    for(let i = 0; i < firstSentence.length; i++) {
-        if(firstSentence[i] === " ") {
-            count1 += 1;
-        }
-    }
-    for(let j = 0; j < secondSentence.length; j++) {
-        if(secondSentence[j] === " ") {
-            count2 += 1;
-        }
-    }
-    if(count1 === count2) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-function upperCaseFirstLetter(string) {
-    let array = string.split(" ");
-    let newString = "";
-    for(let i = 0; i < array.length; i++) {
-        let currentWord = array[i];
-        newString = newString + currentWord[0].toUpperCase() + currentWord.substring(1) + " ";
-    }
-    return newString;
-}
 
 async function fetchData(location) {
     try {
@@ -57,12 +28,14 @@ async function fetchData(location) {
 
 async function processData(promise) {
     const data = await promise;
+    const hoursArray = get24HourTimes(data);
+    const forecastArray = get24HourForecast(data);
     console.log(data);
     let location = data.resolvedAddress;
     let upperCaseLocation = upperCaseFirstLetter(location);
     const currentConditions = data.currentConditions;
     const daysArray = data.days;
-    const dataObject = await new weatherData(upperCaseLocation, currentConditions, daysArray);
+    const dataObject = await new weatherData(upperCaseLocation, currentConditions, hoursArray, forecastArray);
     console.log(dataObject);
     return dataObject;
 }
@@ -86,4 +59,15 @@ async function updateDOM(weatherObject) {
     currentLocation.textContent = await weatherObject.locationName;
     weatherConditions.textContent = await weatherObject.currentConditions.conditions;
     currentTemperature.textContent = Math.floor(await weatherObject.currentConditions.temp) + "°F";
+
 }
+
+// async function setInitialLocation() {
+//     const response = await fetchData("san diego");
+//     console.log(response);
+    
+//     // Later on, finish setting this up, but for now i just want this to call the API every time i make a change so that i can see the object
+
+// }
+
+// setInitialLocation();
