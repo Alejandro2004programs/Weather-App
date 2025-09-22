@@ -38,8 +38,8 @@ async function processData(promise) {
     const rainChanceArray = getRainChance(data);
     const weatherIconNamesArray = getWeatherIconNames(data);
     const dataObject = await new weatherData(upperCaseLocation, currentConditions, hoursArray, forecastArray, rainChanceArray, weatherIconNamesArray);
-    console.log(data);
-    console.log(dataObject);
+    // console.log(data);
+    // console.log(dataObject);
     return dataObject;
 }
 
