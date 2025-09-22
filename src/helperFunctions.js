@@ -51,7 +51,7 @@ function get24HourTimes(data) {
         if(i == 0) {
             returnArray.push("12am");
         }
-        else if(i >= 1 && i <= 13) {
+        else if(i >= 1 && i <= 12) {
             returnArray.push(i + "am");
         }
         else {
@@ -62,7 +62,7 @@ function get24HourTimes(data) {
         if(j == 0) {
             returnArray.push("12am");
         }
-        else if(j >= 1 && j <= 13) {
+        else if(j >= 1 && j <= 12) {
             returnArray.push(j + "am");
         }
         else {

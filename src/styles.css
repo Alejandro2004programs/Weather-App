@@ -26,6 +26,15 @@
 
 /* Header */
 
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color:  #1F2937;
+    color: #F9FAF8;
+}
+
 .locationForm {
     width: 100%;
     height: 100%;
@@ -38,13 +47,12 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    border-bottom: 2px solid blue;
 }
 
 #locationInput {
     border-radius: 16px;
     border: none;
-    background-color: rgb(213, 212, 212);
+    background-color: #F9FAF8;
     height: 25px;
 }
 
@@ -56,6 +64,8 @@
     border-radius: 100px;
     padding: 8px 8px;
     border: none;
+    background-color: #F9FAF8;
+
 }
 
 .searchButton:hover {
@@ -72,6 +82,7 @@
     justify-content: space-around;
     padding-top: 16px;
     padding-bottom: 16px;
+    background-color: rgb(221, 221, 221);
 }
 
 .mainContentHeaderDiv {
@@ -92,7 +103,7 @@
 
 .currentWeatherDiv {
     border-radius: 100px;
-    border: 2px solid blue;
+    border: 4px solid rgb(207, 207, 207);
     width: 200px;
     height: 200px;
     display: flex;
