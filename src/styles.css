@@ -7,7 +7,7 @@
 
 .container {
     display: grid;
-    grid-template-rows: 0.25fr 1fr 1fr;
+    grid-template-rows: 0.25fr 1fr 0.5fr;
     width: 100dvw;
     height: 100dvh;
 }
@@ -69,7 +69,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding-top: 16px;
     padding-bottom: 16px;
 }
@@ -119,7 +119,7 @@
 }
 
 .futureHoursContainer {
-    height: 45%;
+    height: 90%;
     width: 95dvw;
     background-color: rgb(237, 237, 237);
     border-radius: 32px;
@@ -134,19 +134,9 @@
     gap: 8px;
 }
 
-.futureDaysContainer {
-    height: 45%;
-    width: 95dvw;
-    background-color: rgb(241, 240, 240);
-    border-radius: 32px;
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
 .futureHourDiv {
-    border: 2px solid blue;
-    height: 100px;
-    width: 50px;
+    height: 150px;
+    width: 75px;
     flex: 0 0 auto;
     border-radius: 8px;
     display: flex;
@@ -155,6 +145,13 @@
     justify-content: space-around;
 }
 
-.futureDayDiv {
+.futureTimeText {
 
 }
+
+
+
+.futureTemperatureText {
+
+}
+

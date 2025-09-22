@@ -43,6 +43,18 @@ async function processData(promise) {
     return dataObject;
 }
 
+async function getWeatherIcon(iconName) {
+    try {
+        const icon = await import('./weatherIcons/' + iconName + '.png');
+        return icon.default;
+    }
+    catch(err) {
+        console.warn(`Missing icon: ${iconName}, using fallback.`);
+        const fallback = await import("./weatherIcons/clear-day.png");
+        return fallback.default;
+    }
+}
+
 function setUpInputForm() {
     const locationForm = document.querySelector(".locationForm");
     locationForm.addEventListener("submit", async(e) => {
@@ -63,23 +75,34 @@ async function updateDOM(weatherObject) {
     currentLocation.textContent = await weatherObject.locationName;
     weatherConditions.textContent = await weatherObject.currentConditions.conditions;
     currentTemperature.textContent = Math.floor(await weatherObject.currentConditions.temp) + "°F";
+    const futureForecastContainer = document.querySelector(".futureHoursContainer");
+    futureForecastContainer.replaceChildren();
+    for(let i = 0; i <= 23; i++) {
+        const futureForecastDiv = document.createElement("div");
+        const futureTimeText = document.createElement("p");
+        const imageContainer = document.createElement("div");
+        const weatherIcon = document.createElement("img");
+        const futureTemperatureText = document.createElement("p");
+        futureTimeText.textContent = weatherObject.hoursArray[i];
+        futureTemperatureText.textContent = weatherObject.forecastArray[i] + "°F"; 
+        weatherIcon.src = await getWeatherIcon(weatherObject.weatherIconNamesArray[i]);
+        futureForecastDiv.setAttribute("class", "futureHourDiv");
+        futureTimeText.setAttribute("class", "futureTimeText");
+        futureTemperatureText.setAttribute("class", "futureTemperatureText");
+        imageContainer.appendChild(weatherIcon);
+        futureForecastDiv.appendChild(futureTimeText);
+        futureForecastDiv.appendChild(imageContainer);
+        futureForecastDiv.appendChild(futureTemperatureText);
+        futureForecastContainer.appendChild(futureForecastDiv);
+    }
 }
 
 setUpInputForm();
 
+async function setInitialLocation() {
+    const response = await fetchData("san diego");
+    const weatherObject = await processData(response);
+    updateDOM(weatherObject);
+}
 
-
-
-// const image = document.querySelector(".weatherImage");
-// image.src = "src/weatherIcons/sun.png";
-// console.log(image);
-
-// async function setInitialLocation() {
-//     const response = await fetchData("san diego");
-//     console.log(response);
-    
-//     // Later on, finish setting this up, but for now i just want this to call the API every time i make a change so that i can see the object
-
-// }
-
-// setInitialLocation();
+setInitialLocation();

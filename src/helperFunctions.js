@@ -48,10 +48,26 @@ function get24HourTimes(data) {
     const currentTime = data.currentConditions.datetime;
     const currentHour = currentTime.substring(0, 2);
     for(let i = parseInt(currentHour) + 1; i <= 23; i++) {
-        returnArray.push(i);
+        if(i == 0) {
+            returnArray.push("12am");
+        }
+        else if(i >= 1 && i <= 13) {
+            returnArray.push(i + "am");
+        }
+        else {
+            returnArray.push((parseInt(i) - 12) + "pm")
+        }
     }
     for(let j = 0; j <= parseInt(currentHour); j++) {
-        returnArray.push(j)
+        if(j == 0) {
+            returnArray.push("12am");
+        }
+        else if(j >= 1 && j <= 13) {
+            returnArray.push(j + "am");
+        }
+        else {
+            returnArray.push((parseInt(j) - 12) + "pm")
+        }
     }
     return returnArray;
 }
