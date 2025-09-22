@@ -1,1 +1,1 @@
-<a href="https://www.flaticon.com/free-icons/weather" title="weather icons">Weather icons created by iconixar - Flaticon</a>
+Weather app that takes the input of a city and displays weather data for it
