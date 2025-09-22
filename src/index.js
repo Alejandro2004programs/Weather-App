@@ -1,14 +1,16 @@
 import "./styles.css";
-import {compareSentenceLength, upperCaseFirstLetter, get24HourForecast, get24HourTimes} from "./helperFunctions.js";
+import {compareSentenceLength, upperCaseFirstLetter, get24HourForecast, get24HourTimes, getRainChance, getWeatherIconNames} from "./helperFunctions.js";
 
 class weatherData {
-    constructor(locationName, currentConditions, hoursArray, forecastArray) {
+    constructor(locationName, currentConditions, hoursArray, forecastArray, rainChanceArray, weatherIconNamesArray) {
         this.locationName = locationName;
         this.currentConditions = currentConditions;
         this.hoursArray = hoursArray;
         this.forecastArray = forecastArray;
+        this.rainChanceArray = rainChanceArray;
+        this.weatherIconNamesArray = weatherIconNamesArray;
     }
-} 
+}
 
 async function fetchData(location) {
     try {
@@ -28,20 +30,22 @@ async function fetchData(location) {
 
 async function processData(promise) {
     const data = await promise;
+    const location = data.resolvedAddress;
+    const upperCaseLocation = upperCaseFirstLetter(location);
+    const currentConditions = data.currentConditions;
     const hoursArray = get24HourTimes(data);
     const forecastArray = get24HourForecast(data);
+    const rainChanceArray = getRainChance(data);
+    const weatherIconNamesArray = getWeatherIconNames(data);
+    const dataObject = await new weatherData(upperCaseLocation, currentConditions, hoursArray, forecastArray, rainChanceArray, weatherIconNamesArray);
     console.log(data);
-    let location = data.resolvedAddress;
-    let upperCaseLocation = upperCaseFirstLetter(location);
-    const currentConditions = data.currentConditions;
-    const daysArray = data.days;
-    const dataObject = await new weatherData(upperCaseLocation, currentConditions, hoursArray, forecastArray);
     console.log(dataObject);
     return dataObject;
 }
 
-const locationForm = document.querySelector(".locationForm");
-locationForm.addEventListener("submit", async(e) => {
+function setUpInputForm() {
+    const locationForm = document.querySelector(".locationForm");
+    locationForm.addEventListener("submit", async(e) => {
     e.preventDefault();
     const inputData = locationForm.locationInput.value;
     const response = await fetchData(inputData);
@@ -49,8 +53,8 @@ locationForm.addEventListener("submit", async(e) => {
         const weatherObject = await processData(response);
         updateDOM(weatherObject);
     }
-    
-});
+    });
+}
 
 async function updateDOM(weatherObject) {
     const currentLocation = document.querySelector(".currentLocation");
@@ -59,8 +63,16 @@ async function updateDOM(weatherObject) {
     currentLocation.textContent = await weatherObject.locationName;
     weatherConditions.textContent = await weatherObject.currentConditions.conditions;
     currentTemperature.textContent = Math.floor(await weatherObject.currentConditions.temp) + "°F";
-
 }
+
+setUpInputForm();
+
+
+
+
+// const image = document.querySelector(".weatherImage");
+// image.src = "src/weatherIcons/sun.png";
+// console.log(image);
 
 // async function setInitialLocation() {
 //     const response = await fetchData("san diego");

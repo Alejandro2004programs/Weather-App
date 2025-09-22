@@ -56,4 +56,32 @@ function get24HourTimes(data) {
     return returnArray;
 }
 
-export {compareSentenceLength, upperCaseFirstLetter, get24HourForecast, get24HourTimes};
+function getRainChance(data) {
+    const returnArray = [];
+    const currentHour = data.currentConditions.datetime.substring(0, 2);
+    const currentDay = data.days[0];
+    const nextDay = data.days[1];
+    for(let i = parseInt(currentHour) + 1; i <= 23; i++) {
+        returnArray.push(currentDay.hours[i].precipprob);
+    }
+    for(let j = 0; j <= parseInt(currentHour); j++) {
+        returnArray.push(nextDay.hours[j].precipprob);
+    }
+    return returnArray;
+}
+
+function getWeatherIconNames(data) {
+    const returnArray = [];
+    const currentHour = data.currentConditions.datetime.substring(0, 2);
+    const currentDay = data.days[0];
+    const nextDay = data.days[1];
+    for(let i = parseInt(currentHour) + 1; i <= 23; i++) {
+        returnArray.push(currentDay.hours[i].icon);
+    }
+    for(let j = 0; j <= parseInt(currentHour); j++) {
+        returnArray.push(nextDay.hours[j].icon);
+    }
+    return returnArray;
+}
+
+export {compareSentenceLength, upperCaseFirstLetter, get24HourForecast, get24HourTimes, getRainChance, getWeatherIconNames};
