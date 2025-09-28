@@ -1,14 +1,16 @@
 import "./styles.css";
-import {compareSentenceLength, upperCaseFirstLetter, get24HourForecast, get24HourTimes, getRainChance, getWeatherIconNames} from "./helperFunctions.js";
+import {compareSentenceLength, upperCaseFirstLetter, get24HourForecast, get24HourTimes, getRainChance, getWeatherIconNames, getCurrentWeatherIcon} from "./helperFunctions.js";
 
 class weatherData {
-    constructor(locationName, currentConditions, hoursArray, forecastArray, rainChanceArray, weatherIconNamesArray) {
+    constructor(locationName, currentConditions, hoursArray, forecastArray, rainChanceArray, weatherIconNamesArray, currentWeatherIcon) {
         this.locationName = locationName;
         this.currentConditions = currentConditions;
         this.hoursArray = hoursArray;
         this.forecastArray = forecastArray;
         this.rainChanceArray = rainChanceArray;
         this.weatherIconNamesArray = weatherIconNamesArray;
+        this.currentWeatherIcon = currentWeatherIcon;
+
     }
 }
 
@@ -37,9 +39,10 @@ async function processData(promise) {
     const forecastArray = get24HourForecast(data);
     const rainChanceArray = getRainChance(data);
     const weatherIconNamesArray = getWeatherIconNames(data);
-    const dataObject = await new weatherData(upperCaseLocation, currentConditions, hoursArray, forecastArray, rainChanceArray, weatherIconNamesArray);
-    // console.log(data);
-    // console.log(dataObject);
+    const currentWeatherIcon = getCurrentWeatherIcon(data);
+    const dataObject = await new weatherData(upperCaseLocation, currentConditions, hoursArray, forecastArray, rainChanceArray, weatherIconNamesArray, currentWeatherIcon);
+    console.log(data);
+    console.log(dataObject);
     return dataObject;
 }
 
@@ -95,14 +98,17 @@ async function updateDOM(weatherObject) {
         futureForecastDiv.appendChild(futureTemperatureText);
         futureForecastContainer.appendChild(futureForecastDiv);
     }
+    const currentWeatherIcon = document.querySelector(".currentWeatherIcon");
+    currentWeatherIcon.src = await getWeatherIcon(weatherObject.currentWeatherIcon);
+    
 }
 
 setUpInputForm();
 
-async function setInitialLocation() {
-    const response = await fetchData("san diego");
-    const weatherObject = await processData(response);
-    updateDOM(weatherObject);
-}
+// async function setInitialLocation() {
+//     const response = await fetchData("san diego");
+//     const weatherObject = await processData(response);
+//     updateDOM(weatherObject);
+// }
 
-setInitialLocation();
+// setInitialLocation();

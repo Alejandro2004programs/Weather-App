@@ -7,9 +7,10 @@
 
 .container {
     display: grid;
-    grid-template-rows: 0.25fr 1fr 0.5fr;
+    grid-template-rows: 0.125fr 1fr 0.5fr;
     width: 100dvw;
     height: 100dvh;
+    background-color: rgba(0, 0, 255, 0.325);
 }
 
 .header {
@@ -31,8 +32,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    background-color:  #1F2937;
-    color: #F9FAF8;
 }
 
 .locationForm {
@@ -52,7 +51,6 @@
 #locationInput {
     border-radius: 16px;
     border: none;
-    background-color: #F9FAF8;
     height: 25px;
 }
 
@@ -64,8 +62,6 @@
     border-radius: 100px;
     padding: 8px 8px;
     border: none;
-    background-color: #F9FAF8;
-
 }
 
 .searchButton:hover {
@@ -82,7 +78,12 @@
     justify-content: space-around;
     padding-top: 16px;
     padding-bottom: 16px;
-    background-color: rgb(221, 221, 221);
+    background-color: rgb(237, 237, 237);
+    width: 95vw;
+    border-radius: 32px;
+    margin-top: 32px;
+    margin-bottom: 8px;
+    justify-self: center;
 }
 
 .mainContentHeaderDiv {
@@ -120,7 +121,6 @@
 /* Additional Content */
 
 .additionalContent {
-    background-color: rgba(0, 0, 255, 0.325);
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -35,10 +35,10 @@ function get24HourForecast(data) {
     const currentDay = data.days[0];
     const nextDay = data.days[1];
     for(let i = parseInt(currentHour) + 1; i <= 23; i++) {
-        returnArray.push(currentDay.hours[i].temp);
+        returnArray.push(Math.floor(currentDay.hours[i].temp));
     }
     for(let j = 0; j <= parseInt(currentHour); j++) {
-        returnArray.push(nextDay.hours[j].temp);
+        returnArray.push(Math.floor(nextDay.hours[j].temp));
     }
     return returnArray;
 }
@@ -100,4 +100,11 @@ function getWeatherIconNames(data) {
     return returnArray;
 }
 
-export {compareSentenceLength, upperCaseFirstLetter, get24HourForecast, get24HourTimes, getRainChance, getWeatherIconNames};
+function getCurrentWeatherIcon(data) {
+    const currentHour = data.currentConditions.datetime.substring(0, 2);
+    const currentDay = data.days[0];
+    const currentWeatherIcon = currentDay.hours[currentHour].icon;
+    return currentWeatherIcon;
+}
+
+export {compareSentenceLength, upperCaseFirstLetter, get24HourForecast, get24HourTimes, getRainChance, getWeatherIconNames, getCurrentWeatherIcon};
