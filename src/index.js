@@ -41,8 +41,8 @@ async function processData(promise) {
     const weatherIconNamesArray = getWeatherIconNames(data);
     const currentWeatherIcon = getCurrentWeatherIcon(data);
     const dataObject = await new weatherData(upperCaseLocation, currentConditions, hoursArray, forecastArray, rainChanceArray, weatherIconNamesArray, currentWeatherIcon);
-    console.log(data);
-    console.log(dataObject);
+    // console.log(data);
+    // console.log(dataObject);
     return dataObject;
 }
 
@@ -105,10 +105,10 @@ async function updateDOM(weatherObject) {
 
 setUpInputForm();
 
-// async function setInitialLocation() {
-//     const response = await fetchData("san diego");
-//     const weatherObject = await processData(response);
-//     updateDOM(weatherObject);
-// }
+async function setInitialLocation() {
+    const response = await fetchData("san diego");
+    const weatherObject = await processData(response);
+    updateDOM(weatherObject);
+}
 
-// setInitialLocation();
+setInitialLocation();
